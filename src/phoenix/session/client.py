@@ -486,7 +486,7 @@ class Client(TraceDataExtractor):
         Returns:
             pandas DataFrame
         """
-        url = f"v1/datasets/{dataset_id}/versions"
+        url = build_dataset_versions_url(web_url="v1/", dataset_id=dataset_id)
         response = self._client.get(url=url, params={"limit": limit})
         response.raise_for_status()
         if not (records := response.json()["data"]):
@@ -855,6 +855,10 @@ FileHeaders: TypeAlias = dict[str, str]
 
 def build_dataset_examples_url(*, web_url: str, dataset_id: str) -> str:
     return urljoin(web_url, f"datasets/{dataset_id}/examples")
+
+
+def build_dataset_versions_url(*, web_url: str, dataset_id: str) -> str:
+    return urljoin(web_url, f"datasets/{dataset_id}/versions")
 
 
 def _get_csv_column_headers(path: Path) -> tuple[str, ...]:
