@@ -824,7 +824,10 @@ class Client(TraceDataExtractor):
         data = response.json()["data"]
         version_id = data["version_id"]
         examples = data["examples"]
-        examples_url = urljoin(self.web_url, f"datasets/{dataset_id}/examples")
+        examples_url = build_dataset_examples_url(
+            web_url=self.web_url,
+            dataset_id=dataset_id,
+        )
         print(f"💾 Examples uploaded: {examples_url}")
         print(f"🗄️ Dataset version ID: {version_id}")
 
@@ -848,6 +851,10 @@ FileName: TypeAlias = str
 FilePointer: TypeAlias = BinaryIO
 FileType: TypeAlias = str
 FileHeaders: TypeAlias = dict[str, str]
+
+
+def build_dataset_examples_url(*, web_url: str, dataset_id: str) -> str:
+    return urljoin(web_url, f"datasets/{dataset_id}/examples")
 
 
 def _get_csv_column_headers(path: Path) -> tuple[str, ...]:

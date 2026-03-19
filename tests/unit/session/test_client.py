@@ -16,7 +16,7 @@ from pandas.testing import assert_frame_equal
 from respx import MockRouter
 from strawberry.relay import GlobalID
 
-from phoenix.session.client import Client, TimeoutError
+from phoenix.session.client import Client, TimeoutError, build_dataset_examples_url
 from phoenix.trace import SpanEvaluations
 from phoenix.trace.dsl import SpanQuery
 from phoenix.trace.trace_dataset import TraceDataset
@@ -236,6 +236,14 @@ def test_get_dataset_versions_empty_data(
     expected = pd.DataFrame()
     actual = client.get_dataset_versions(str(dataset_global_id))
     assert_frame_equal(actual, expected)
+
+
+def test_build_dataset_examples_url() -> None:
+    dataset_id = str(GlobalID("Dataset", str(42)))
+    assert build_dataset_examples_url(
+        web_url="https://demo.phoenix.test/",
+        dataset_id=dataset_id,
+    ) == f"https://demo.phoenix.test/datasets/{dataset_id}/examples"
 
 
 @pytest.mark.parametrize(
