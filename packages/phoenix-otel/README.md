@@ -106,6 +106,8 @@ export PHOENIX_COLLECTOR_ENDPOINT="https://app.phoenix.arize.com/s/your-space"
 export PHOENIX_PROJECT_NAME="my-project"
 ```
 
+Use `PHOENIX_API_KEY` together with `PHOENIX_COLLECTOR_ENDPOINT` when you are sending traces to Phoenix Cloud. For local Phoenix development, you can usually skip the API key and point the endpoint at `http://127.0.0.1:6006/v1/traces`.
+
 **Direct Configuration**:
 
 ```python
