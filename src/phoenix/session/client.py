@@ -854,11 +854,11 @@ FileHeaders: TypeAlias = dict[str, str]
 
 
 def build_dataset_examples_url(*, web_url: str, dataset_id: str) -> str:
-    return urljoin(web_url, f"datasets/{dataset_id}/examples")
+    return urljoin(web_url, f"datasets/{quote(dataset_id, safe='')}/examples")
 
 
 def build_dataset_versions_url(*, web_url: str, dataset_id: str) -> str:
-    return urljoin(web_url, f"datasets/{dataset_id}/versions")
+    return urljoin(web_url, f"datasets/{quote(dataset_id, safe='')}/versions")
 
 
 def _get_csv_column_headers(path: Path) -> tuple[str, ...]:

@@ -259,6 +259,20 @@ def test_build_dataset_versions_url() -> None:
     ) == f"https://demo.phoenix.test/datasets/{dataset_id}/versions"
 
 
+def test_build_dataset_examples_url_quotes_dataset_id() -> None:
+    assert build_dataset_examples_url(
+        web_url="https://demo.phoenix.test/",
+        dataset_id="Dataset/with space",
+    ) == "https://demo.phoenix.test/datasets/Dataset%2Fwith%20space/examples"
+
+
+def test_build_dataset_versions_url_quotes_dataset_id() -> None:
+    assert build_dataset_versions_url(
+        web_url="https://demo.phoenix.test/",
+        dataset_id="Dataset/with space",
+    ) == "https://demo.phoenix.test/datasets/Dataset%2Fwith%20space/versions"
+
+
 @pytest.mark.parametrize(
     "version_id",
     [
