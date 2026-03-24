@@ -61,6 +61,14 @@ pip install arize-phoenix
 
 Phoenix container images are available via [Docker Hub](https://hub.docker.com/r/arizephoenix/phoenix) and can be deployed using Docker or Kubernetes. Arize AI also provides cloud instances at [app.phoenix.arize.com](https://app.phoenix.arize.com/).
 
+## Local Phoenix vs Phoenix Cloud
+
+Phoenix supports both local/self-hosted deployments and Phoenix Cloud.
+
+- For local development, launch Phoenix on your machine and point tracing clients at `http://127.0.0.1:6006/v1/traces`.
+- For Phoenix Cloud, use your space-specific `PHOENIX_COLLECTOR_ENDPOINT` and send an API key with `PHOENIX_API_KEY`.
+- In both cases, `PHOENIX_PROJECT_NAME` is the easiest way to keep traces grouped by application or environment.
+
 ## Packages
 
 The `arize-phoenix` package includes the entire Phoenix platform. However, if you have deployed the Phoenix platform, there are lightweight Python sub-packages and TypeScript packages that can be used in conjunction with the platform.
