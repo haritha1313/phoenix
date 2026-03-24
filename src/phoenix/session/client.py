@@ -861,6 +861,16 @@ def build_dataset_versions_url(*, web_url: str, dataset_id: str) -> str:
     return urljoin(web_url, f"datasets/{quote(dataset_id, safe='')}/versions")
 
 
+def build_dataset_version_url(*, web_url: str, dataset_id: str, version_id: str) -> str:
+    return urljoin(
+        web_url,
+        (
+            f"datasets/{quote(dataset_id, safe='')}/versions/"
+            f"{quote(version_id, safe='')}"
+        ),
+    )
+
+
 def _get_csv_column_headers(path: Path) -> tuple[str, ...]:
     path = path.resolve()
     if not path.is_file():

@@ -20,6 +20,7 @@ from phoenix.session.client import (
     Client,
     TimeoutError,
     build_dataset_examples_url,
+    build_dataset_version_url,
     build_dataset_versions_url,
 )
 from phoenix.trace import SpanEvaluations
@@ -271,6 +272,17 @@ def test_build_dataset_versions_url_quotes_dataset_id() -> None:
         web_url="https://demo.phoenix.test/",
         dataset_id="Dataset/with space",
     ) == "https://demo.phoenix.test/datasets/Dataset%2Fwith%20space/versions"
+
+
+def test_build_dataset_version_url() -> None:
+    assert build_dataset_version_url(
+        web_url="https://demo.phoenix.test/",
+        dataset_id="Dataset/with space",
+        version_id="Version/with slash",
+    ) == (
+        "https://demo.phoenix.test/datasets/Dataset%2Fwith%20space/versions/"
+        "Version%2Fwith%20slash"
+    )
 
 
 @pytest.mark.parametrize(
